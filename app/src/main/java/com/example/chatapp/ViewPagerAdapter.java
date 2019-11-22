@@ -18,9 +18,12 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
 
         switch (position){
             case 0 :
-                fragment = new Chats();
+                fragment = new Share();
                 break;
             case 1 :
+                fragment = new Chats();
+                break;
+            case 2 :
                 fragment = new Profile();
                 break;
         }
@@ -30,7 +33,7 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return 2;
+        return 3;
     }
 
     @Nullable
@@ -38,8 +41,10 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
     public CharSequence getPageTitle(int position) {
         switch (position){
             case 0 :
-                return "Chats";
+                return "Share";
             case 1 :
+                return "Chats";
+            case 2 :
                 return "Profile";
         }
         return "";

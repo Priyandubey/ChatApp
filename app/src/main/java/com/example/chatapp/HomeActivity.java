@@ -46,7 +46,7 @@ public class HomeActivity extends AppCompatActivity {
 
         switch (item.getItemId()){
             case R.id.logout :
-                    mAuth.signOut();
+                mAuth.signOut();
                 Intent intent = new Intent(HomeActivity.this,MainActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
