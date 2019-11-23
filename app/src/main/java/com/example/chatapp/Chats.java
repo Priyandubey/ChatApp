@@ -28,6 +28,7 @@ public class Chats extends Fragment {
         View view =  inflater.inflate(R.layout.fragment_chats, container, false);
 
         return view;
+
     }
 
 }
