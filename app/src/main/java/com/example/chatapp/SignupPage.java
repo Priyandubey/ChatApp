@@ -16,6 +16,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class SignupPage extends AppCompatActivity {
 
@@ -57,6 +58,8 @@ public class SignupPage extends AppCompatActivity {
                             Intent intent = new Intent(SignupPage.this,HomeActivity.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             startActivity(intent);
+
+                            FirebaseDatabase.getInstance().getReference().child("my_users").child(task.getResult().getUser().getUid()).child("username").setValue(username.getText().toString());
 
                         }else{
                             Toast.makeText(SignupPage.this, signupEmail.getText().toString() , Toast.LENGTH_SHORT).show();
