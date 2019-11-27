@@ -15,9 +15,9 @@ import java.util.ArrayList;
 public class ChatsRecylerAdapter extends RecyclerView.Adapter<ChatsRecylerAdapter.MyChatsHolder> {
 
     Context context;
-    ArrayList<String> userList;
+    ArrayList<SendMessageUser> userList;
 
-    public ChatsRecylerAdapter(Context context, ArrayList<String> userList) {
+    public ChatsRecylerAdapter(Context context, ArrayList<SendMessageUser> userList) {
         this.context = context;
         this.userList = userList;
     }
@@ -32,7 +32,7 @@ public class ChatsRecylerAdapter extends RecyclerView.Adapter<ChatsRecylerAdapte
 
     @Override
     public void onBindViewHolder(@NonNull MyChatsHolder holder, int position) {
-        holder.chatsName.setText(userList.get(position));
+        holder.chatsName.setText(userList.get(position).getUsername());
     }
 
     @Override

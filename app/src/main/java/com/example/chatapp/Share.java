@@ -14,6 +14,9 @@ import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.provider.MediaStore;
 import android.view.LayoutInflater;
@@ -21,16 +24,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
-import java.io.File;
+import java.util.ArrayList;
 import java.util.UUID;
 
 import static android.app.Activity.RESULT_OK;
@@ -38,6 +45,7 @@ import static android.app.Activity.RESULT_OK;
 
 public class Share extends Fragment {
 
+    public  ArrayList<SendMessageUser> usersList;
 
     public Share() {
         // Required empty public constructor
@@ -50,14 +58,30 @@ public class Share extends Fragment {
     Bitmap bitmap;
     private String imageIdentifier;
 
+    RecyclerView recyclerView;
+    static ShareRecyclerAdapter shareRecyclerAdapter;
+    RecyclerView.LayoutManager layoutManager;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        usersList = new ArrayList<>();
         View view = inflater.inflate(R.layout.fragment_share, container, false);
 
         shareCaption = view.findViewById(R.id.shareCaption);
         shareImage = view.findViewById(R.id.shareImage);
+
+        recyclerView = view.findViewById(R.id.shareRecycler);
+        layoutManager = new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(layoutManager);
+
+        shareRecyclerAdapter = new ShareRecyclerAdapter(getContext(),usersList);
+        recyclerView.setAdapter(shareRecyclerAdapter);
+
+        recyclerView.addItemDecoration(new DividerItemDecoration(getContext(),DividerItemDecoration.VERTICAL));
+
+        fetchUsers();
 
         shareImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -133,6 +157,39 @@ public class Share extends Fragment {
             }
         });
 
+    }
+    public void fetchUsers(){
+        FirebaseDatabase.getInstance().getReference().child("my_users").addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+                String username = dataSnapshot.child("username").getValue().toString();
+                String uuid = dataSnapshot.getKey();
+
+                usersList.add(new SendMessageUser(username,uuid));
+                shareRecyclerAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
 

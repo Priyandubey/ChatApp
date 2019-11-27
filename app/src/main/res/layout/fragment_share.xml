@@ -32,8 +32,9 @@
         android:padding="10dp" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="409dp"
-        android:layout_height="403dp"
+        android:id="@+id/shareRecycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:padding="10dp"
         tools:layout_editor_absoluteX="1dp"
         tools:layout_editor_absoluteY="327dp" />

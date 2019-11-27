@@ -32,6 +32,8 @@ public class HomeActivity extends AppCompatActivity {
         tabLayout = findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
 
+        viewPager.setCurrentItem(1);
+
     }
 
     @Override

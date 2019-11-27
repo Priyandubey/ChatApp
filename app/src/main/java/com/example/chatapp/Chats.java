@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -21,13 +22,13 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 
 
+
 /**
  * A simple {@link Fragment} subclass.
  */
 public class Chats extends Fragment {
 
-    ArrayList<String> usersList;
-
+    public ArrayList<SendMessageUser> usersList;
 
     public Chats() {
         // Required empty public constructor
@@ -51,12 +52,25 @@ public class Chats extends Fragment {
         chatsRecylerAdapter = new ChatsRecylerAdapter(getContext(),usersList);
         chatsRecyclerView.setAdapter(chatsRecylerAdapter);
 
+        chatsRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(),DividerItemDecoration.VERTICAL));
+
+
+        fetchUsers();
+
+
+        return view;
+
+    }
+
+    public void fetchUsers(){
         FirebaseDatabase.getInstance().getReference().child("my_users").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
                 String username = dataSnapshot.child("username").getValue().toString();
-                usersList.add(username);
+                String uuid = dataSnapshot.getKey();
+
+                usersList.add(new SendMessageUser(username,uuid));
                 chatsRecylerAdapter.notifyDataSetChanged();
             }
 
@@ -80,10 +94,6 @@ public class Chats extends Fragment {
 
             }
         });
-
-
-        return view;
-
     }
 
 }
