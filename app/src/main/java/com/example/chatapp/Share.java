@@ -79,7 +79,7 @@ public class Share extends Fragment {
 
         if (requestCode == READ_EXTERNAL_PERMISSION_CODE && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
-                loadAndSelectImage();
+            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, READ_EXTERNAL_PERMISSION_CODE);
         }
 
     }
