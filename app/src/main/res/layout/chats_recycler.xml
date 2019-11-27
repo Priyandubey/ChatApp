@@ -5,13 +5,13 @@
 
     <ImageView
         android:id="@+id/chatsImage"
-        android:layout_width="50dp"
-        android:layout_height="50dp"></ImageView>
+        android:layout_width="60dp"
+        android:layout_height="60dp"></ImageView>
 
     <TextView
         android:id="@+id/chatsName"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="60dp"
         android:text="User's Name"
         android:textSize="20sp"></TextView>
 

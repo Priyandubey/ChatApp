@@ -127,6 +127,9 @@ public class Share extends Fragment {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                 Toast.makeText(getContext(), "successfully uploaded", Toast.LENGTH_SHORT).show();
+
+
+
             }
         });
 
