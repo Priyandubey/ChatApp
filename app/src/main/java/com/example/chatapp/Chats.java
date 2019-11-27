@@ -48,15 +48,16 @@ public class Chats extends Fragment {
         layoutManager = new LinearLayoutManager(getContext());
         chatsRecyclerView.setLayoutManager(layoutManager);
 
+        chatsRecylerAdapter = new ChatsRecylerAdapter(getContext(),usersList);
+        chatsRecyclerView.setAdapter(chatsRecylerAdapter);
+
         FirebaseDatabase.getInstance().getReference().child("my_users").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
                 String username = dataSnapshot.child("username").getValue().toString();
                 usersList.add(username);
-                chatsRecylerAdapter = new ChatsRecylerAdapter(getContext(),usersList);
-                chatsRecyclerView.setAdapter(chatsRecylerAdapter);
-
+                chatsRecylerAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -79,6 +80,7 @@ public class Chats extends Fragment {
 
             }
         });
+
 
         return view;
 
