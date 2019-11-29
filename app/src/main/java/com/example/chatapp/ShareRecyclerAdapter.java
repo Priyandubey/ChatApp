@@ -10,6 +10,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
 
 public class ShareRecyclerAdapter extends RecyclerView.Adapter<ShareRecyclerAdapter.ShareUserHolder> {
@@ -20,6 +23,7 @@ public class ShareRecyclerAdapter extends RecyclerView.Adapter<ShareRecyclerAdap
     public ShareRecyclerAdapter(Context context, ArrayList<SendMessageUser> userList) {
         this.context = context;
         this.userList = userList;
+
     }
 
     @NonNull

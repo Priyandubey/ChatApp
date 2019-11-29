@@ -29,6 +29,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -87,7 +88,7 @@ public class Share extends Fragment {
             @Override
             public void onClick(View v) {
                 if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                    loadAndSelectImage();
+                    loadAndSelectImage(GET_ACTIVITY_RESULT_CODE);
                 } else {
                     ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, READ_EXTERNAL_PERMISSION_CODE);
                 }
@@ -126,12 +127,12 @@ public class Share extends Fragment {
         }
     }
 
-    public void loadAndSelectImage(){
+    public void loadAndSelectImage(int GET_ACTIVITY_RESULT_CODE){
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         startActivityForResult(intent,GET_ACTIVITY_RESULT_CODE);
     }
 
-    public void uploadImagetoServer(){
+    public void  uploadImagetoServer(){
         shareImage.setDrawingCacheEnabled(true);
         shareImage.buildDrawingCache();
         bitmap = ((BitmapDrawable) shareImage.getDrawable()).getBitmap();
@@ -153,11 +154,11 @@ public class Share extends Fragment {
                 Toast.makeText(getContext(), "successfully uploaded", Toast.LENGTH_SHORT).show();
 
 
-
             }
         });
 
     }
+
     public void fetchUsers(){
         FirebaseDatabase.getInstance().getReference().child("my_users").addChildEventListener(new ChildEventListener() {
             @Override
@@ -166,7 +167,9 @@ public class Share extends Fragment {
                 String username = dataSnapshot.child("username").getValue().toString();
                 String uuid = dataSnapshot.getKey();
 
-                usersList.add(new SendMessageUser(username,uuid));
+
+                    usersList.add(new SendMessageUser(username, uuid));
+
                 shareRecyclerAdapter.notifyDataSetChanged();
             }
 
