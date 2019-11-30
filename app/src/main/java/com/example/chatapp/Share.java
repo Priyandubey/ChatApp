@@ -88,7 +88,7 @@ public class Share extends Fragment {
             @Override
             public void onClick(View v) {
                 if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                    loadAndSelectImage(GET_ACTIVITY_RESULT_CODE);
+                    loadAndSelectImage();
                 } else {
                     ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, READ_EXTERNAL_PERMISSION_CODE);
                 }
@@ -127,7 +127,7 @@ public class Share extends Fragment {
         }
     }
 
-    public void loadAndSelectImage(int GET_ACTIVITY_RESULT_CODE){
+    public void loadAndSelectImage(){
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         startActivityForResult(intent,GET_ACTIVITY_RESULT_CODE);
     }

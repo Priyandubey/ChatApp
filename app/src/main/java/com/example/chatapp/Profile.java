@@ -20,13 +20,18 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.UploadTask;
 
@@ -48,6 +53,7 @@ public class Profile extends Fragment {
     public UserProfileChangeRequest userProfileChangeRequest;
     static  int GET_ACTIVITY_RESULT_CODE = 3;
     Bitmap bitmap;
+    int ON_Profile_Pic = 4;
     String imageIdentifier;
 
     public Profile() {
@@ -64,10 +70,45 @@ public class Profile extends Fragment {
         profileUsername = view.findViewById(R.id.profileUsername);
         uploadButton = view.findViewById(R.id.uploadButton);
 
+        FirebaseDatabase.getInstance().getReference().child("my_users").child(FirebaseAuth.getInstance().getUid()).child("username").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    profileUsername.setText(dataSnapshot.getValue().toString());
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        FirebaseDatabase.getInstance().getReference().child("my_users").child(FirebaseAuth.getInstance().getUid()).child("profile_pic_url").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                    try {
+                        String uri = dataSnapshot.getValue().toString();
+                        Glide.with(getContext())
+                                .load(uri)
+                                .into(profileImageView);
+                    }catch(Exception e){
+                        e.printStackTrace();
+                    }
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(getContext(), "unsuccessful profile loading", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
         profileImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new Share().loadAndSelectImage(GET_ACTIVITY_RESULT_CODE);
+                loadAndSelectImage();
             }
         });
 
@@ -105,7 +146,34 @@ public class Profile extends Fragment {
                     }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            Toast.makeText(getContext(), "Photo saved", Toast.LENGTH_SHORT).show();
+
+                            taskSnapshot.getMetadata().getReference().getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Uri> task) {
+                                    if(task.isSuccessful()){
+                                        FirebaseDatabase.getInstance().getReference().child("my_users").child(FirebaseAuth.getInstance().getUid())
+                                                .child("profile_pic_url").setValue(task.getResult().toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> tsk) {
+                                                if(tsk.isSuccessful()){
+                                                    Toast.makeText(getActivity(), "Successful", Toast.LENGTH_SHORT).show();
+                                                }else{
+                                                    Toast.makeText(getActivity(), "failure", Toast.LENGTH_SHORT).show();
+                                                }
+                                            }
+                                        });
+
+                                    }else{
+                                        Toast.makeText(getContext(), "failed to update", Toast.LENGTH_SHORT).show();
+                                    }
+
+                                }
+                            });
+
+
+
+
+
                         }
                     });
 
@@ -119,15 +187,21 @@ public class Profile extends Fragment {
         return view;
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent dt) {
-        super.onActivityResult(requestCode, resultCode, dt);
+    public void loadAndSelectImage(){
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(intent,ON_Profile_Pic);
+    }
 
-        if(dt!= null && requestCode == GET_ACTIVITY_RESULT_CODE && resultCode == RESULT_OK){
-            Uri uri = dt.getData();
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == ON_Profile_Pic && resultCode == RESULT_OK && data != null){
+            Uri uri = data.getData();
 
             try{
                 bitmap = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(),uri);
+                if(bitmap == null) Toast.makeText(getContext(), "null bitmap", Toast.LENGTH_SHORT).show();
                 profileImageView.setImageBitmap(bitmap);
 
             }catch (Exception e){
