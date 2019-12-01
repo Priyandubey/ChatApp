@@ -1,6 +1,6 @@
 # ChatApp
 This is messenger app though not advanced like facebook messenger but would give real experience.
-The work for the app is in progress....
+Realtime messaging is possible throught this app.
 
 [![Screenshot-20191201-180135-com-example-chatapp.jpg](https://i.postimg.cc/Fs70kPG7/Screenshot-20191201-180135-com-example-chatapp.jpg)](https://postimg.cc/ppMmgJwH)
 [![Screenshot-20191201-180131-com-example-chatapp.jpg](https://i.postimg.cc/WbFJ1dbZ/Screenshot-20191201-180131-com-example-chatapp.jpg)](https://postimg.cc/4mG38Nc4)
