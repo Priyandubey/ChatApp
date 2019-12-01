@@ -167,8 +167,7 @@ public class Share extends Fragment {
                 String username = dataSnapshot.child("username").getValue().toString();
                 String uuid = dataSnapshot.getKey();
 
-
-                    usersList.add(new SendMessageUser(username, uuid));
+                usersList.add(new SendMessageUser(username, uuid));
 
                 shareRecyclerAdapter.notifyDataSetChanged();
             }

@@ -1,6 +1,7 @@
 package com.example.chatapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,8 +37,17 @@ public class ChatsRecylerAdapter extends RecyclerView.Adapter<ChatsRecylerAdapte
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyChatsHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MyChatsHolder holder, final int position) {
         holder.chatsName.setText(userList.get(position).getUsername());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context,ChatRoom.class);
+                intent.putExtra("chatUserUuid",userList.get(position).getUuid());
+                intent.putExtra("chatUserName",userList.get(position).getUsername());
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override

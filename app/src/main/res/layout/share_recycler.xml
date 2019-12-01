@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
@@ -8,19 +9,28 @@
 
     <ImageView
         android:id="@+id/shareRecylerImage"
-        android:layout_width="120dp"
+        android:layout_width="60dp"
         android:layout_height="60dp"
-        android:layout_weight="1"
         android:padding="4dp"
         app:srcCompat="@drawable/messagechatsnewapp" />
 
     <TextView
         android:id="@+id/shareRecylerName"
-        android:layout_width="match_parent"
+        android:layout_width="170dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_marginLeft="10dp"
         android:padding="4dp"
         android:text="TextView"
         android:textSize="20sp" />
+
+    <ImageView
+        android:id="@+id/selectedCheck"
+        android:layout_width="40dp"
+        android:layout_height="60dp"
+        android:layout_gravity="right"
+        android:layout_marginLeft="10dp"
+        android:padding="4dp"
+        android:visibility="invisible"
+        app:srcCompat="@drawable/ic_check" />
 
 </LinearLayout>

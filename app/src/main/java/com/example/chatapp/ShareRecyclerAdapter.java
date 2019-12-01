@@ -19,6 +19,7 @@ public class ShareRecyclerAdapter extends RecyclerView.Adapter<ShareRecyclerAdap
 
     Context context;
     ArrayList<SendMessageUser> userList;
+    int count ;
 
     public ShareRecyclerAdapter(Context context, ArrayList<SendMessageUser> userList) {
         this.context = context;
@@ -35,8 +36,22 @@ public class ShareRecyclerAdapter extends RecyclerView.Adapter<ShareRecyclerAdap
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ShareUserHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final ShareUserHolder holder, int position) {
+        count = 0;
         holder.shareRecylerName.setText(userList.get(position).getUsername());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if(count < 1) {
+                    count++;
+                    v.setVisibility(View.VISIBLE);
+                    holder.selectedCheck.setVisibility(View.VISIBLE);
+                }
+
+
+            }
+        });
     }
 
     @Override
@@ -48,10 +63,12 @@ public class ShareRecyclerAdapter extends RecyclerView.Adapter<ShareRecyclerAdap
     public class ShareUserHolder extends RecyclerView.ViewHolder{
         ImageView shareRecylerImage;
         TextView shareRecylerName;
+        ImageView selectedCheck;
 
         public ShareUserHolder(@NonNull View itemView) {
             super(itemView);
 
+            selectedCheck = itemView.findViewById(R.id.selectedCheck);
             shareRecylerImage = itemView.findViewById(R.id.shareRecylerImage);
             shareRecylerName = itemView.findViewById(R.id.shareRecylerName);
 
