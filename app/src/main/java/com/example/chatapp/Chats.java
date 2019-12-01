@@ -1,6 +1,7 @@
 package com.example.chatapp;
 
 
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -45,6 +46,7 @@ public class Chats extends Fragment {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_chats, container, false);
 
+        view.setBackgroundColor(Color.parseColor("#f1fff0"));
         usersList = new ArrayList<>();
         chatsRecyclerView = view.findViewById(R.id.chatsRecyler);
         layoutManager = new LinearLayoutManager(getContext());

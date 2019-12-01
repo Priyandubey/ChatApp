@@ -93,6 +93,7 @@ public class Profile extends Fragment {
                                 .into(profileImageView);
                     }catch(Exception e){
                         e.printStackTrace();
+                        profileImageView.setImageDrawable(getResources().getDrawable(R.drawable.ic_add_black_24dp));
                     }
 
 

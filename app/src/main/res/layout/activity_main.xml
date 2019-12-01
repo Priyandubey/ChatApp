@@ -33,6 +33,7 @@
         android:layout_marginEnd="20dp"
         android:background="@drawable/round_layout_edittext"
         android:hint="password"
+        android:inputType="textPassword"
         android:padding="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
