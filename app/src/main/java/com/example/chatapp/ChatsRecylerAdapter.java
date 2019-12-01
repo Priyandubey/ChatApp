@@ -8,12 +8,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -37,7 +42,7 @@ public class ChatsRecylerAdapter extends RecyclerView.Adapter<ChatsRecylerAdapte
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyChatsHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final MyChatsHolder holder, final int position) {
         holder.chatsName.setText(userList.get(position).getUsername());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,6 +51,27 @@ public class ChatsRecylerAdapter extends RecyclerView.Adapter<ChatsRecylerAdapte
                 intent.putExtra("chatUserUuid",userList.get(position).getUuid());
                 intent.putExtra("chatUserName",userList.get(position).getUsername());
                 context.startActivity(intent);
+            }
+        });
+        FirebaseDatabase.getInstance().getReference().child("my_users").child(userList.get(position).getUuid()).child("profile_pic_url").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                try {
+                    String uri = dataSnapshot.getValue().toString();
+                    Glide.with(context)
+                            .load(uri)
+                            .into(holder.chatsImage);
+                }catch(Exception e){
+                    e.printStackTrace();
+                }
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(context, "unsuccessful profile loading", Toast.LENGTH_SHORT).show();
             }
         });
     }

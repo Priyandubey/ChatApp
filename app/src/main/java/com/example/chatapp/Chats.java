@@ -20,6 +20,7 @@ import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
 
 import java.util.ArrayList;
 
@@ -73,7 +74,7 @@ public class Chats extends Fragment {
                 String username = dataSnapshot.child("username").getValue().toString();
                 String uuid = dataSnapshot.getKey();
 
-                    usersList.add(new SendMessageUser(username, uuid));
+                usersList.add(new SendMessageUser(username, uuid));
 
                 chatsRecylerAdapter.notifyDataSetChanged();
             }

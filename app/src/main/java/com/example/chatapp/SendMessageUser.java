@@ -1,5 +1,7 @@
 package com.example.chatapp;
 
+import android.widget.ImageView;
+
 public class SendMessageUser {
 
     private String username;
@@ -17,4 +19,5 @@ public class SendMessageUser {
     public String getUuid() {
         return uuid;
     }
+
 }
