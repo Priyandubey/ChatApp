@@ -1,21 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradient1"
+    android:background="#f1fff0"
+    android:orientation="vertical"
     tools:context=".ChatRoom">
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/messagesRecycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginBottom="5dp"
         android:layout_weight="1" />
 
     <LinearLayout
@@ -25,25 +21,26 @@
         android:orientation="horizontal">
 
         <EditText
+            android:id="@+id/sendEditText"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginLeft="5dp"
             android:layout_marginRight="4dp"
             android:layout_marginBottom="5dp"
-            android:layout_marginLeft="5dp"
-            android:padding="10dp"
-            android:hint="Type here something"
+            android:layout_weight="2"
             android:background="@drawable/round_layout_edittext"
-            android:layout_weight="2"/>
+            android:hint="Type here something"
+            android:padding="10dp" />
 
         <ImageView
+            android:id="@+id/sendButton"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginRight="5dp"
             android:layout_marginBottom="5dp"
             android:layout_weight="8"
             android:src="@drawable/ic_send"
-            android:visibility="visible"
-          />
+            android:visibility="visible" />
 
 
     </LinearLayout>
