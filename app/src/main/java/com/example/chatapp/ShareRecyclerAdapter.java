@@ -82,7 +82,7 @@ public class ShareRecyclerAdapter extends RecyclerView.Adapter<ShareRecyclerAdap
     public void shareAndUploadImage(final String uuid){
 
         if(shareImage == null){
-            Toast.makeText(context, "please select an Image", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Please select an Image :(", Toast.LENGTH_SHORT).show();
         }else{
 
 
@@ -122,8 +122,7 @@ public class ShareRecyclerAdapter extends RecyclerView.Adapter<ShareRecyclerAdap
                                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
-                                    if(task.isSuccessful())
-                                    Toast.makeText(context, "shared", Toast.LENGTH_SHORT).show();
+                                    if(task.isSuccessful()) ;
                                     else
                                         Toast.makeText(context, "sharing failed", Toast.LENGTH_SHORT).show();
                                 }
@@ -139,8 +138,7 @@ public class ShareRecyclerAdapter extends RecyclerView.Adapter<ShareRecyclerAdap
                                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
-                                    if(task.isSuccessful())
-                                        Toast.makeText(context, "shared", Toast.LENGTH_SHORT).show();
+                                    if(task.isSuccessful()) ;
                                     else
                                         Toast.makeText(context, "sharing failed", Toast.LENGTH_SHORT).show();
                                 }

@@ -8,10 +8,10 @@
         android:id="@+id/chatsRoomChats"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textMultiLine"
+        android:background="@drawable/only_round"
         android:padding="20dp"
         android:text="This is a example message.."
-        android:textColor="@color/common_google_signin_btn_text_dark_focused"
+        android:textColor="@android:color/black"
         android:textSize="18sp" />
 
 </LinearLayout>

@@ -3,6 +3,7 @@ package com.example.chatapp;
 import android.content.Context;
 import android.graphics.Color;
 import android.text.Layout;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,9 +48,11 @@ public class PhotoChatRecyclerAdapter extends RecyclerView.Adapter <PhotoChatRec
         if(arrayList.get(position).getSendOrReceived().equals("sent")){
             holder.photoMessage.setBackgroundColor(Color.parseColor("#e5fff2"));
             holder.photoText.setBackgroundColor(Color.parseColor("#e5fff2"));
+            holder.photoText.setGravity(Gravity.END);
         }else{
             holder.photoText.setBackgroundColor(Color.WHITE);
             holder.photoMessage.setBackgroundColor(Color.WHITE);
+            holder.photoText.setGravity(Gravity.START);
         }
     }
 

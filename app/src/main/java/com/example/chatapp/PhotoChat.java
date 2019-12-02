@@ -35,7 +35,7 @@ public class PhotoChat extends AppCompatActivity {
         final String uuid = intent.getStringExtra("chatUserUuid");
         String username = intent.getStringExtra("chatUserName");
 
-        setTitle(username);
+        setTitle(username + "'s Shared Photos");
 
         arrayList = new ArrayList<>();
 

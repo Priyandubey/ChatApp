@@ -2,6 +2,8 @@ package com.example.chatapp;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.os.Build;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,8 +37,14 @@ public class UserRoomRecylerAdapter extends RecyclerView.Adapter<UserRoomRecyler
             holder.chatsRoomChats.setText(arrayList.get(position).getMessage());
             if(arrayList.get(position).getSendOrReceived().equals("sent")){
                 holder.chatsRoomChats.setBackgroundColor(Color.parseColor("#e5fff2"));
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    holder.chatsRoomChats.setGravity(Gravity.END);
+                }
             }else{
                 holder.chatsRoomChats.setBackgroundColor(Color.WHITE);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    holder.chatsRoomChats.setGravity(Gravity.START);
+                }
             }
     }
 

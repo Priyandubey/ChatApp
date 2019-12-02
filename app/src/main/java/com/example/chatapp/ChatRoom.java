@@ -3,6 +3,7 @@ package com.example.chatapp;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -60,6 +61,9 @@ public class ChatRoom extends AppCompatActivity {
 
         userRoomRecylerAdapter = new UserRoomRecylerAdapter(arrayList,this);
         recyclerView.setAdapter(userRoomRecylerAdapter);
+
+        recyclerView.addItemDecoration(new DividerItemDecoration(getApplicationContext(),DividerItemDecoration.VERTICAL));
+
 
         FirebaseDatabase.getInstance().getReference().child("my_users").child(FirebaseAuth.getInstance().getUid()).child(uuid)
                 .addChildEventListener(new ChildEventListener() {
