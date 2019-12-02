@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -73,10 +74,13 @@ public class Chats extends Fragment {
 
                 String username = dataSnapshot.child("username").getValue().toString();
                 String uuid = dataSnapshot.getKey();
+                if(!uuid.equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
 
-                usersList.add(new SendMessageUser(username, uuid));
-
-                chatsRecylerAdapter.notifyDataSetChanged();
+                    usersList.add(new SendMessageUser(username, uuid));
+//                    Log.i("user",uuid);
+//                    Log.i("currentuser",FirebaseAuth.getInstance().getCurrentUser().getUid());
+                    chatsRecylerAdapter.notifyDataSetChanged();
+                }
             }
 
             @Override

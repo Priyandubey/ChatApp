@@ -34,7 +34,7 @@ public class UserRoomRecylerAdapter extends RecyclerView.Adapter<UserRoomRecyler
     public void onBindViewHolder(@NonNull ChatRoomViewHolder holder, int position) {
             holder.chatsRoomChats.setText(arrayList.get(position).getMessage());
             if(arrayList.get(position).getSendOrReceived().equals("sent")){
-                holder.chatsRoomChats.setBackgroundColor(Color.parseColor("#b0ffaa"));
+                holder.chatsRoomChats.setBackgroundColor(Color.parseColor("#e5fff2"));
             }else{
                 holder.chatsRoomChats.setBackgroundColor(Color.WHITE);
             }

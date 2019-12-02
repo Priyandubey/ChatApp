@@ -24,22 +24,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.UploadTask;
 
-import java.io.ByteArrayOutputStream;
+
 import java.util.ArrayList;
-import java.util.UUID;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -54,10 +47,9 @@ public class Share extends Fragment {
 
     final int READ_EXTERNAL_PERMISSION_CODE = 1;
     final int GET_ACTIVITY_RESULT_CODE = 2;
-    ImageView shareImage;
-    EditText shareCaption;
-    Bitmap bitmap;
-    private String imageIdentifier;
+    static ImageView shareImage;
+    static EditText shareCaption;
+    static Bitmap bitmap;
 
     RecyclerView recyclerView;
     static ShareRecyclerAdapter shareRecyclerAdapter;
@@ -119,7 +111,6 @@ public class Share extends Fragment {
                 try{
                     bitmap = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(),choosenImageData);
                     shareImage.setImageBitmap(bitmap);
-                    uploadImagetoServer();
                 }catch (Exception e){
                     e.printStackTrace();
                 }
@@ -132,32 +123,6 @@ public class Share extends Fragment {
         startActivityForResult(intent,GET_ACTIVITY_RESULT_CODE);
     }
 
-    public void  uploadImagetoServer(){
-        shareImage.setDrawingCacheEnabled(true);
-        shareImage.buildDrawingCache();
-        bitmap = ((BitmapDrawable) shareImage.getDrawable()).getBitmap();
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-        byte[] data = baos.toByteArray();
-
-        imageIdentifier = UUID.randomUUID() + ".png";
-
-        UploadTask uploadTask = FirebaseStorage.getInstance().getReference().child("my_images").child(imageIdentifier).putBytes(data);
-        uploadTask.addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception exception) {
-                Toast.makeText(getContext(), "Failed uploading", Toast.LENGTH_SHORT).show();
-            }
-        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                Toast.makeText(getContext(), "successfully uploaded", Toast.LENGTH_SHORT).show();
-
-
-            }
-        });
-
-    }
 
     public void fetchUsers(){
         FirebaseDatabase.getInstance().getReference().child("my_users").addChildEventListener(new ChildEventListener() {
@@ -167,9 +132,11 @@ public class Share extends Fragment {
                 String username = dataSnapshot.child("username").getValue().toString();
                 String uuid = dataSnapshot.getKey();
 
-                usersList.add(new SendMessageUser(username, uuid));
+                if(!uuid.equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
+                    usersList.add(new SendMessageUser(username, uuid));
 
-                shareRecyclerAdapter.notifyDataSetChanged();
+                    shareRecyclerAdapter.notifyDataSetChanged();
+                }
             }
 
             @Override

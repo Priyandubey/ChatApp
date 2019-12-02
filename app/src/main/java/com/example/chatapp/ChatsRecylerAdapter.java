@@ -74,6 +74,20 @@ public class ChatsRecylerAdapter extends RecyclerView.Adapter<ChatsRecylerAdapte
                 Toast.makeText(context, "unsuccessful profile loading", Toast.LENGTH_SHORT).show();
             }
         });
+
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+
+                Intent intent = new Intent(context,PhotoChat.class);
+                intent.putExtra("chatUserUuid",userList.get(position).getUuid());
+                intent.putExtra("chatUserName",userList.get(position).getUsername());
+                context.startActivity(intent);
+
+                return true;
+            }
+        });
+
     }
 
     @Override
