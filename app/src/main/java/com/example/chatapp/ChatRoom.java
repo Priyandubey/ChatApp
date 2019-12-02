@@ -71,6 +71,7 @@ public class ChatRoom extends AppCompatActivity {
 
                         arrayList.add(new ChatInfo(m,ros));
                         userRoomRecylerAdapter.notifyDataSetChanged();
+                        recyclerView.smoothScrollToPosition(arrayList.size() - 1);
 
                     }
 

@@ -115,7 +115,7 @@ public class ShareRecyclerAdapter extends RecyclerView.Adapter<ShareRecyclerAdap
                             HashMap<String, String> hm = new HashMap<>();
                             hm.put("url",url);
                             hm.put("sendOrReceived","sent");
-                            hm.put("caption",shareCaption.getText().toString());
+                            hm.put("message",shareCaption.getText().toString());
 
                             FirebaseDatabase.getInstance().getReference().child("my_users").child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                     .child("photos").child(uuid).push().setValue(hm)
@@ -132,7 +132,7 @@ public class ShareRecyclerAdapter extends RecyclerView.Adapter<ShareRecyclerAdap
                             HashMap<String, String> h = new HashMap<>();
                             h.put("url",url);
                             h.put("sendOrReceived","recieved");
-                            h.put("caption",shareCaption.getText().toString());
+                            h.put("message",shareCaption.getText().toString());
 
                             FirebaseDatabase.getInstance().getReference().child("my_users").child(uuid)
                                     .child("photos").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).push().setValue(h)
