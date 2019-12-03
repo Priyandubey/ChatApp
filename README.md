@@ -1,9 +1,14 @@
 # ChatApp
 This is a Messenger app.
+
 User can change profle pic and username.
+
 Users can send and receive realtime messages.
+
 Users can send and recive images.
+
 Uses Firebase for Authentication.
+
 Uses Firebase databases for storage of messages and images.
 
 [![Screenshot-20191201-180135-com-example-chatapp.jpg](https://i.postimg.cc/Fs70kPG7/Screenshot-20191201-180135-com-example-chatapp.jpg)](https://postimg.cc/ppMmgJwH)
