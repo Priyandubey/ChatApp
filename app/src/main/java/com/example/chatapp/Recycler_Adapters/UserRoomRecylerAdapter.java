@@ -1,4 +1,4 @@
-package com.example.chatapp;
+package com.example.chatapp.Recycler_Adapters;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -11,6 +11,9 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.chatapp.Class_Structures.ChatInfo;
+import com.example.chatapp.R;
 
 import java.util.ArrayList;
 

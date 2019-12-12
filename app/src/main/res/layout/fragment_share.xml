@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/gradient1"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".Ui_Activities.MainActivity">
 
     <ImageView
         android:id="@+id/shareImage"

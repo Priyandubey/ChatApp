@@ -1,4 +1,4 @@
-package com.example.chatapp;
+package com.example.chatapp.Ui_Activities;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -8,8 +8,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 
+import com.example.chatapp.Class_Structures.PhotoMessageModel;
+import com.example.chatapp.R;
+import com.example.chatapp.Recycler_Adapters.PhotoChatRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -19,7 +23,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 
 public class PhotoChat extends AppCompatActivity {
-
     ArrayList<PhotoMessageModel> arrayList;
 
     RecyclerView recyclerView;
@@ -30,6 +33,8 @@ public class PhotoChat extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_photo_chat);
+
+        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         Intent intent = this.getIntent();
         final String uuid = intent.getStringExtra("chatUserUuid");

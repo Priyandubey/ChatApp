@@ -1,11 +1,10 @@
-package com.example.chatapp;
+package com.example.chatapp.Ui_Fragments;
 
 
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -25,6 +24,9 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.example.chatapp.R;
+import com.example.chatapp.Recycler_Adapters.ShareRecyclerAdapter;
+import com.example.chatapp.Class_Structures.SendMessageUser;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -47,9 +49,9 @@ public class Share extends Fragment {
 
     final int READ_EXTERNAL_PERMISSION_CODE = 1;
     final int GET_ACTIVITY_RESULT_CODE = 2;
-    static ImageView shareImage;
-    static EditText shareCaption;
-    static Bitmap bitmap;
+    public static ImageView shareImage;
+    public static EditText shareCaption;
+    public static Bitmap bitmap;
 
     RecyclerView recyclerView;
     static ShareRecyclerAdapter shareRecyclerAdapter;

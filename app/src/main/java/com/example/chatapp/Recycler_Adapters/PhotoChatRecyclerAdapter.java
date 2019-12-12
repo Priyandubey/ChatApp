@@ -1,8 +1,7 @@
-package com.example.chatapp;
+package com.example.chatapp.Recycler_Adapters;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.text.Layout;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.chatapp.Class_Structures.PhotoMessageModel;
+import com.example.chatapp.R;
 
 import java.util.ArrayList;
 

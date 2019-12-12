@@ -1,4 +1,4 @@
-package com.example.chatapp;
+package com.example.chatapp.Ui_Fragments;
 
 
 import android.graphics.Color;
@@ -11,17 +11,18 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.chatapp.R;
+import com.example.chatapp.Recycler_Adapters.ChatsRecylerAdapter;
+import com.example.chatapp.Class_Structures.SendMessageUser;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.storage.FirebaseStorage;
 
 import java.util.ArrayList;
 

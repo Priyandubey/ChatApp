@@ -1,10 +1,11 @@
-package com.example.chatapp;
+package com.example.chatapp.Ui_Activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.chatapp.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -28,6 +30,8 @@ public class SignupPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup_page);
 
+        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
         mAuth = FirebaseAuth.getInstance();
 
         signupEmail = findViewById(R.id.signupEmail);
@@ -39,7 +43,7 @@ public class SignupPage extends AppCompatActivity {
 
     public void moveLogin(View view){
 
-        Intent intent = new Intent(SignupPage.this,MainActivity.class);
+        Intent intent = new Intent(SignupPage.this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
 
@@ -55,7 +59,7 @@ public class SignupPage extends AppCompatActivity {
 
                         if(task.isSuccessful()){
 
-                            Intent intent = new Intent(SignupPage.this,HomeActivity.class);
+                            Intent intent = new Intent(SignupPage.this, HomeActivity.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             startActivity(intent);
 

@@ -5,6 +5,10 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
+import com.example.chatapp.Ui_Fragments.Chats;
+import com.example.chatapp.Ui_Fragments.Profile;
+import com.example.chatapp.Ui_Fragments.Share;
+
 public class ViewPagerAdapter extends FragmentPagerAdapter {
 
 

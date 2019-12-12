@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient1"
-    tools:context=".MainActivity">
+    tools:context=".Ui_Activities.MainActivity">
 
     <EditText
         android:layout_width="match_parent"

@@ -1,4 +1,4 @@
-package com.example.chatapp;
+package com.example.chatapp.Recycler_Adapters;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -14,6 +14,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.chatapp.R;
+import com.example.chatapp.Class_Structures.SendMessageUser;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -28,9 +30,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
 
-import static com.example.chatapp.Share.bitmap;
-import static com.example.chatapp.Share.shareCaption;
-import static com.example.chatapp.Share.shareImage;
+import static com.example.chatapp.Ui_Fragments.Share.bitmap;
+import static com.example.chatapp.Ui_Fragments.Share.shareCaption;
+import static com.example.chatapp.Ui_Fragments.Share.shareImage;
 
 public class ShareRecyclerAdapter extends RecyclerView.Adapter<ShareRecyclerAdapter.ShareUserHolder> {
 

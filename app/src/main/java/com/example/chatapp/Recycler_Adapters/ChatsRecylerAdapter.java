@@ -1,8 +1,7 @@
-package com.example.chatapp;
+package com.example.chatapp.Recycler_Adapters;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +13,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.google.firebase.auth.FirebaseAuth;
+import com.example.chatapp.Ui_Activities.ChatRoom;
+import com.example.chatapp.Ui_Activities.PhotoChat;
+import com.example.chatapp.R;
+import com.example.chatapp.Class_Structures.SendMessageUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -47,7 +49,7 @@ public class ChatsRecylerAdapter extends RecyclerView.Adapter<ChatsRecylerAdapte
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context,ChatRoom.class);
+                Intent intent = new Intent(context, ChatRoom.class);
                 intent.putExtra("chatUserUuid",userList.get(position).getUuid());
                 intent.putExtra("chatUserName",userList.get(position).getUsername());
                 context.startActivity(intent);
@@ -79,7 +81,7 @@ public class ChatsRecylerAdapter extends RecyclerView.Adapter<ChatsRecylerAdapte
             @Override
             public boolean onLongClick(View v) {
 
-                Intent intent = new Intent(context,PhotoChat.class);
+                Intent intent = new Intent(context, PhotoChat.class);
                 intent.putExtra("chatUserUuid",userList.get(position).getUuid());
                 intent.putExtra("chatUserName",userList.get(position).getUsername());
                 context.startActivity(intent);
