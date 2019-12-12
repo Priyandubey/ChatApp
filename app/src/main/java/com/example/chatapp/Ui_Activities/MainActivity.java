@@ -1,4 +1,4 @@
-package com.example.chatapp;
+package com.example.chatapp.Ui_Activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,6 +13,8 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.chatapp.R;
+import com.example.chatapp.Ui_Activities.HomeActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -48,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
 
                         if(task.isSuccessful()){
 
-                            Intent intent = new Intent(MainActivity.this,HomeActivity.class);
+                            Intent intent = new Intent(MainActivity.this, HomeActivity.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             startActivity(intent);
                         }else{
