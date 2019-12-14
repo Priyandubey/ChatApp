@@ -5,7 +5,7 @@ User can change profle pic and username.
 
 Users can send and receive realtime messages.
 
-Users can send and recive images.
+Users can send and receive images.
 
 Uses Firebase for Authentication.
 
