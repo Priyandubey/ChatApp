@@ -140,7 +140,7 @@ public class ShareRecyclerAdapter extends RecyclerView.Adapter<ShareRecyclerAdap
                                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
-                                    if(task.isSuccessful()) ;
+                                    if(task.isSuccessful()) Toast.makeText(context, "shared Image", Toast.LENGTH_SHORT).show();
                                     else
                                         Toast.makeText(context, "sharing failed", Toast.LENGTH_SHORT).show();
                                 }

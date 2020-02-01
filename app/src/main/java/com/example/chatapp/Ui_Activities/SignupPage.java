@@ -52,7 +52,7 @@ public class SignupPage extends AppCompatActivity {
 
     public void signup(View view){
 
-        mAuth.createUserWithEmailAndPassword(signupEmail.getText().toString(),signupPassword.getText().toString())
+        mAuth.createUserWithEmailAndPassword(signupEmail.getText().toString().trim(),signupPassword.getText().toString().trim())
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {

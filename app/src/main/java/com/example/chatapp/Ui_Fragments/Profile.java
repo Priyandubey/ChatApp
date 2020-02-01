@@ -168,21 +168,14 @@ public class Profile extends Fragment {
                                     }else{
                                         Toast.makeText(getContext(), "failed to update", Toast.LENGTH_SHORT).show();
                                     }
-
                                 }
                             });
-
-
-
-
-
                         }
                     });
 
                 }else{
                     Toast.makeText(getActivity(), "Please select both name and Photo", Toast.LENGTH_SHORT).show();
                 }
-
             }
         });
 
@@ -204,6 +197,7 @@ public class Profile extends Fragment {
             try{
                 bitmap = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(),uri);
                 if(bitmap == null) Toast.makeText(getContext(), "null bitmap", Toast.LENGTH_SHORT).show();
+                else
                 profileImageView.setImageBitmap(bitmap);
 
             }catch (Exception e){

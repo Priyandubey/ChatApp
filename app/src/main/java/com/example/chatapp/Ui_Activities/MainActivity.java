@@ -38,12 +38,10 @@ public class MainActivity extends AppCompatActivity {
         loginEmail = findViewById(R.id.loginEmail);
         loginPassword = findViewById(R.id.loginPassword);
 
-
-
     }
 
     public void login(View view){
-        mAuth.signInWithEmailAndPassword(loginEmail.getText().toString(),loginPassword.getText().toString())
+        mAuth.signInWithEmailAndPassword(loginEmail.getText().toString().trim(),loginPassword.getText().toString().trim())
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
@@ -59,8 +57,6 @@ public class MainActivity extends AppCompatActivity {
 
                     }
                 });
-
-
     }
 
     public void moveSignup(View view){
